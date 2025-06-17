@@ -6,9 +6,8 @@ telegram_party_bot/
 │   │   ├── __init__.py
 │   │   ├── registration.py   # Name/surname collection
 │   │   ├── event_creation.py # Host creates event
-│   │   ├── invite_handler.py # Handles invite links
-│   │   ├── admin.py          # Admin commands
-│   │   └── misc.py           # Start, help, etc.
+│   │   ├── link_generation.py # Handles invite links
+│   │   └── admin.py          # Admin commands
 │   ├── database/
 │   │   ├── __init__.py
 │   │   └── mongo.py          # MongoDB logic and collections

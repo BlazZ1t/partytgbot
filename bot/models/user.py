@@ -7,6 +7,7 @@ class User(BaseModel):
     name: str
     surname: str
     registered_at: datetime
+    invited_by: int
     hosted_events: List[str] = []
     signed_events: List[str] = []
     invite_links: List[str] = []

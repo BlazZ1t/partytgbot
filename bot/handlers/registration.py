@@ -11,6 +11,18 @@ async def start_registration(update: Update, context: ContextTypes.DEFAULT_TYPE)
     if get_users_col().find_one({"_id": user_id}):
         await update.message.reply_text("Похоже ты уже зарегестрированы! Давай тусоваться!")
         return ConversationHandler.END
+    
+    args = context.args
+    if args:
+        try:
+            inviter_id = int(args[0])
+            if user_id != inviter_id:
+                context.user_data["invited_by"] = inviter_id
+        except ValueError:
+            context.user_data["invited_by"] = None
+    else:
+        context.user_data["invited_by"] = None
+
     await update.message.reply_text("Привееет! Кажется мы ещё не знакомы, давай знакомиться, как тебя зовут?")
     return ASK_NAME
 
@@ -27,6 +39,7 @@ async def get_surname(update: Update, context: ContextTypes.DEFAULT_TYPE):
         name=name,
         surname=surname,
         registered_at=datetime.utcnow(),
+        invited_by=context.user_data.get("invited_by")
     )
     get_users_col().insert_one(user.model_dump(by_alias=True))
     await update.message.reply_text(f"Добро пожаловать, {name} {surname}! Ты зарегистрирован.")
@@ -38,7 +51,8 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 def register(app: Application):
     conv_handler = ConversationHandler(
-        entry_points=[CommandHandler("register", start_registration)],
+        entry_points=[CommandHandler("register", start_registration),
+                      CommandHandler("start", start_registration),],
         states={
             ASK_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_name)],
             ASK_SURNAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, get_surname)]
