@@ -1,5 +1,5 @@
 from telegram.ext import ApplicationBuilder
-from bot.handlers import registration, start
+from bot.handlers import registration, start, event_creation
 from bot.database.mongo import init_db
 from dotenv import load_dotenv
 import os
@@ -14,6 +14,8 @@ def main():
     app = ApplicationBuilder().token(os.getenv('BOT_TOKEN')).build()
     start.register(app)
     registration.register(app)
+    event_creation.register(app)
+
 
     app.run_polling()
 

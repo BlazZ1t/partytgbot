@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import List, Dict
 from datetime import datetime
 
@@ -14,7 +14,7 @@ class InviteLink(BaseModel):
     expires_at: datetime
 
 class Event(BaseModel):
-    _id: str
+    id: str = Field(..., alias="_id")
     name: str
     description: str
     district: str
@@ -27,3 +27,6 @@ class Event(BaseModel):
     host_id: int
     guests: List[GuestInfo] = []
     invite_links: List[InviteLink] = []
+
+    class Config:
+        validate_by_name = True
