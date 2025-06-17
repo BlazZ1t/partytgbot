@@ -68,10 +68,10 @@ async def finalyze(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Ебать дурень, циферками пиши")
         return GET_CAPACITY
     await update.message.reply_text("Всё, заебись, зарегали, вот что получилось\n" \
-    f"Название: {context.user_data["name"]}\n" \
-    f"Дата: {context.user_data["time"]}\n" \
-    f"Адрес: {context.user_data["address"]}, {context.user_data["district"]}\n" \
-    f"Описание: {context.user_data["description"]} \n" \
+    f"Название: {context.user_data['name']}\n" \
+    f"Дата: {context.user_data['time']}\n" \
+    f"Адрес: {context.user_data['address']}, {context.user_data['district']}\n" \
+    f"Описание: {context.user_data['description']} \n" \
     "\nПроверку и изменение данных потом добавим")
 
     user_id = update.effective_user.id

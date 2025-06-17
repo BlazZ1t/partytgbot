@@ -6,9 +6,13 @@ import os
 from dotenv import load_dotenv
 import requests
 from io import BytesIO
+from pathlib import Path
 
 async def get_link(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    load_dotenv()
+    if Path(".env.dev").exists():
+        load_dotenv(".env.dev")
+    else:
+        load_dotenv() 
     user_id = update.effective_user.id
     payload = str(user_id)
     link = f"https://t.me/{os.getenv('BOT_USERNAME')}?start={payload}"
