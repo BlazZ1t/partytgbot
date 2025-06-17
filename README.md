@@ -1,4 +1,4 @@
-telegram_party_bot/
+`telegram_party_bot/
 ├── bot/
 │   ├── __init__.py
 │   ├── main.py               # Entry point
@@ -24,4 +24,4 @@ telegram_party_bot/
 ├── docker-compose.yml       # MongoDB, bot container
 ├── Dockerfile               # Bot Dockerfile
 ├── requirements.txt         # python-telegram-bot, pymongo, etc.
-└── README.md
+└── README.md`
